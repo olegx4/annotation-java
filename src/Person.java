@@ -1,7 +1,7 @@
-import CustomAnnotations.DefaultConstructor;
-import CustomAnnotations.PrivateConstructor;
-import CustomAnnotations.PrivateField;
-import CustomAnnotations.Test;
+import customAnnotations.DefaultConstructor;
+import customAnnotations.PrivateConstructor;
+import customAnnotations.PrivateField;
+import customAnnotations.Test;
 
 @Test
 public class Person {
@@ -32,10 +32,6 @@ public class Person {
         this.phoneNumber = phoneNumber;
         this.name = name;
         this.surname = surname;
-    }
-
-    public String getName() {
-        return name;
     }
 
     public int getPhoneNumber() {

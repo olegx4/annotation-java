@@ -1,13 +1,12 @@
-package CustomAnnotations;
+package customAnnotations;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
-
-@Target(ElementType.CONSTRUCTOR)
+@Target(ElementType.FIELD)
 @Retention(RetentionPolicy.RUNTIME)
-public @interface PrivateConstructor {
+public @interface PrivateField {
+    String field();
 }
-
