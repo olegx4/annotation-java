@@ -1,15 +1,20 @@
-@MyAnnotations.Test
+import CustomAnnotations.DefaultConstructor;
+import CustomAnnotations.PrivateConstructor;
+import CustomAnnotations.PrivateField;
+import CustomAnnotations.Test;
+
+@Test
 public class Person {
 
     private int phoneNumber;
 
-    @MyAnnotations.PrivateField(field = "name")
+    @PrivateField(field = "name")
     private String name;
 
-    @MyAnnotations.PrivateField(field = "surname")
+    @PrivateField(field = "surname")
     private String surname;
 
-    @MyAnnotations.DefaultConstructor
+    @DefaultConstructor
     public Person() {
         phoneNumber = 11_22_33;
         name = "Person";
@@ -22,7 +27,7 @@ public class Person {
         this.surname = surname;
     }
 
-    @MyAnnotations.PrivateConstructor
+    @PrivateConstructor
     private Person(String name, String surname) {
         this.phoneNumber = phoneNumber;
         this.name = name;
