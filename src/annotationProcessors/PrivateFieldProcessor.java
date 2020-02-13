@@ -7,7 +7,7 @@ import java.util.Map;
 import java.util.TreeMap;
 
 public class PrivateFieldProcessor {
-    public static Map<String, String> process(Object ob) {
+    public Map<String, String> process(Object ob) {
         Map<String, String> data = new TreeMap<>();
         try {
             Field[] fields = ob.getClass().getDeclaredFields();
