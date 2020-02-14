@@ -1,24 +1,17 @@
-import customAnnotations.DefaultConstructor;
-import customAnnotations.PrivateConstructor;
-import customAnnotations.PrivateField;
-import customAnnotations.Test;
+import customAnnotations.CteateInstanceOfPrivateConstructor;
+import customAnnotations.GetPrivateField;
 
-@Test
 public class Person {
-
     private int phoneNumber;
-
-    @PrivateField(field = "name")
+    @GetPrivateField(field = "name")
     private String name;
-
-    @PrivateField(field = "surname")
+    @GetPrivateField(field = "surname")
     private String surname;
 
-    @DefaultConstructor
     public Person() {
-        phoneNumber = 11_22_33;
-        name = "Person";
-        surname = "Person";
+        this.phoneNumber = 11_22_33;
+        this.name = "Person";
+        this.surname = "Person";
     }
 
     public Person(int phoneNumber, String name, String surname) {
@@ -27,9 +20,8 @@ public class Person {
         this.surname = surname;
     }
 
-    @PrivateConstructor
+    @CteateInstanceOfPrivateConstructor
     private Person(String name, String surname) {
-        this.phoneNumber = phoneNumber;
         this.name = name;
         this.surname = surname;
     }
@@ -50,7 +42,12 @@ public class Person {
         this.surname = surname;
     }
 
-    private void output() {
-        System.out.println("Surname: " + surname + " Name: " + name + " Phone: " + phoneNumber);
+    @Override
+    public String toString() {
+        return "Person{" +
+                "phoneNumber=" + phoneNumber +
+                ", name='" + name + '\'' +
+                ", surname='" + surname + '\'' +
+                '}';
     }
 }
