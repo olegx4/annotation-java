@@ -8,6 +8,6 @@ import java.lang.annotation.Target;
 
 @Target(ElementType.CONSTRUCTOR)
 @Retention(RetentionPolicy.RUNTIME)
-public @interface GetPrivateConstructor {
+public @interface CteateInstanceOfPrivateConstructor {
 }
 
