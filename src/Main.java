@@ -1,5 +1,5 @@
-import Person.Person;
-import Person.PersonInitializer;
+import person.Person;
+import person.PersonInitializer;
 
 import java.lang.reflect.Constructor;
 import java.util.Map;
