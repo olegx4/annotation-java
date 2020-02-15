@@ -6,9 +6,14 @@ import java.lang.reflect.Field;
 import java.util.HashMap;
 import java.util.Map;
 
-public class GetPrivateFieldProcessor {
+public class PrivateFieldProcessor {
     public Map<String, String> process(Object object) {
         Map<String, String> data = new HashMap<>();
+
+        if (object == null) {
+            return new HashMap<>();
+        }
+
         try {
             Field[] fields = object.getClass().getDeclaredFields();
             for (Field f : fields) {
@@ -18,7 +23,7 @@ public class GetPrivateFieldProcessor {
                 }
             }
         } catch (IllegalAccessException e) {
-            System.err.println(e);
+            System.err.println(e.getMessage());
         }
         return data;
     }
