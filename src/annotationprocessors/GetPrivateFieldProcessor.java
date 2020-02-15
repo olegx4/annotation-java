@@ -1,6 +1,6 @@
-package annotationProcessors;
+package annotationprocessors;
 
-import customAnnotations.GetPrivateField;
+import customannotations.GetPrivateField;
 
 import java.lang.reflect.Field;
 import java.util.HashMap;

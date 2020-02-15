@@ -1,7 +1,7 @@
-package Person;
+package person;
 
-import customAnnotations.CreateInstanceOfPrivateConstructor;
-import customAnnotations.GetPrivateField;
+import customannotations.CreateInstanceOfPrivateConstructor;
+import customannotations.GetPrivateField;
 
 public class Person {
     private int phoneNumber;
