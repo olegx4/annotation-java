@@ -1,4 +1,6 @@
-import customAnnotations.CteateInstanceOfPrivateConstructor;
+package personInitializer;
+
+import customAnnotations.CreateInstanceOfPrivateConstructor;
 import customAnnotations.GetPrivateField;
 
 public class Person {
@@ -10,8 +12,8 @@ public class Person {
 
     public Person() {
         this.phoneNumber = 11_22_33;
-        this.name = "Person";
-        this.surname = "Person";
+        this.name = "personInitializer.Person";
+        this.surname = "personInitializer.Person";
     }
 
     public Person(int phoneNumber, String name, String surname) {
@@ -20,7 +22,7 @@ public class Person {
         this.surname = surname;
     }
 
-    @CteateInstanceOfPrivateConstructor
+    @CreateInstanceOfPrivateConstructor
     private Person(String name, String surname) {
         this.name = name;
         this.surname = surname;
@@ -44,7 +46,7 @@ public class Person {
 
     @Override
     public String toString() {
-        return "Person{" +
+        return "personInitializer.Person{" +
                 "phoneNumber=" + phoneNumber +
                 ", name='" + name + '\'' +
                 ", surname='" + surname + '\'' +
