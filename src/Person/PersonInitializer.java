@@ -1,4 +1,4 @@
-package personInitializer;
+package Person;
 
 import annotationProcessors.GetPrivateFieldProcessor;
 

@@ -1,4 +1,4 @@
-package personInitializer;
+package Person;
 
 import customAnnotations.CreateInstanceOfPrivateConstructor;
 import customAnnotations.GetPrivateField;
