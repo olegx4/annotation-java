@@ -1,8 +1,44 @@
 package person;
 
-import annotationprocessors.GetPrivateFieldProcessor;
+import annotationprocessors.PrivateFieldProcessor;
+
+import java.lang.reflect.InvocationTargetException;
+import java.util.HashMap;
+import java.util.Map;
 
 public class PersonInitializer {
-    public final GetPrivateFieldProcessor getPrivateFieldProcessor = new GetPrivateFieldProcessor();
+    private final PrivateFieldProcessor privateFieldProcessor;
+    private final System.Logger logger = System.getLogger("PersonInitializerLogger");
 
+    public PersonInitializer() {
+        this.privateFieldProcessor = new PrivateFieldProcessor();
+    }
+
+    public Map<String, String> getPrivateFields(Person person) {
+        return privateFieldProcessor.process(person);
+    }
+
+    public Map<String, String> defaultInitialization() {
+        Person person = null;
+        try {
+            Class<?> classObject = Class.forName(Person.class.getName());
+            person = (Person) classObject.getDeclaredConstructor().newInstance();
+        } catch (InstantiationException e) {
+            logger.log(System.Logger.Level.ERROR, "Cannot create instance of the Person class");
+        } catch (IllegalAccessException e) {
+            logger.log(System.Logger.Level.ERROR, "IllegalAccessException is observed when creating instance of Person class");
+        } catch (InvocationTargetException e) {
+            logger.log(System.Logger.Level.ERROR, "Exception was thrown by an invoked method or constructor");
+        } catch (NoSuchMethodException e) {
+            logger.log(System.Logger.Level.ERROR, "Unable to find matching method");
+        } catch (ClassNotFoundException e) {
+            logger.log(System.Logger.Level.ERROR, "Unable to find Person class");
+        }
+        return privateFieldProcessor.process(person);
+    }
+
+    public Map<String, String> initializePerson() {
+        // TODO: 2020/15/01 ShapovalO write code here
+        return new HashMap<>();
+    }
 }

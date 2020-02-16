@@ -12,8 +12,8 @@ public class Person {
 
     public Person() {
         this.phoneNumber = 11_22_33;
-        this.name = "personInitializer.Person";
-        this.surname = "personInitializer.Person";
+        this.name = "name";
+        this.surname = "surname";
     }
 
     public Person(int phoneNumber, String name, String surname) {
@@ -25,22 +25,6 @@ public class Person {
     @CreateInstanceOfPrivateConstructor
     private Person(String name, String surname) {
         this.name = name;
-        this.surname = surname;
-    }
-
-    public int getPhoneNumber() {
-        return phoneNumber;
-    }
-
-    public void setPhoneNumber(int phoneNumber) {
-        this.phoneNumber = phoneNumber;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public void setSurname(String surname) {
         this.surname = surname;
     }
 
