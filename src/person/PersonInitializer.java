@@ -2,8 +2,8 @@ package person;
 
 import annotationprocessors.PrivateFieldProcessor;
 
+import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
-import java.util.HashMap;
 import java.util.Map;
 
 public class PersonInitializer {
@@ -37,8 +37,17 @@ public class PersonInitializer {
         return privateFieldProcessor.process(person);
     }
 
-    public Map<String, String> initializePerson() {
-        // TODO: 2020/15/01 ShapovalO write code here
-        return new HashMap<>();
+    public Map<String, String> initializePerson(String name, String surname) {
+        Person person2 = new Person();
+        try {
+            Class<?> examplePerson = Class.forName(Person.class.getName());
+            Class<?>[] params = {String.class, String.class};
+            Constructor<?> exampleConstructor = examplePerson.getDeclaredConstructor(params);
+            exampleConstructor.setAccessible(true);
+            person2 = (Person) exampleConstructor.newInstance(name, surname);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return privateFieldProcessor.process(person2);
     }
 }

@@ -30,7 +30,7 @@ public class Person {
 
     @Override
     public String toString() {
-        return "personInitializer.Person{" +
+        return "Person{" +
                 "phoneNumber=" + phoneNumber +
                 ", name='" + name + '\'' +
                 ", surname='" + surname + '\'' +
