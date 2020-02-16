@@ -45,8 +45,16 @@ public class PersonInitializer {
             Constructor<?> exampleConstructor = examplePerson.getDeclaredConstructor(params);
             exampleConstructor.setAccessible(true);
             person2 = (Person) exampleConstructor.newInstance(name, surname);
-        } catch (Exception e) {
-            e.printStackTrace();
+        } catch (InstantiationException e) {
+            logger.log(System.Logger.Level.ERROR, "Cannot create instance of the Person class");
+        } catch (IllegalAccessException e) {
+            logger.log(System.Logger.Level.ERROR, "IllegalAccessException is observed when creating instance of Person class");
+        } catch (InvocationTargetException e) {
+            logger.log(System.Logger.Level.ERROR, "Exception was thrown by an invoked method or constructor");
+        } catch (NoSuchMethodException e) {
+            logger.log(System.Logger.Level.ERROR, "Unable to find matching method");
+        } catch (ClassNotFoundException e) {
+            logger.log(System.Logger.Level.ERROR, "Unable to find Person class");
         }
         return privateFieldProcessor.process(person2);
     }
