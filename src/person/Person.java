@@ -22,7 +22,7 @@ public class Person {
         this.surname = surname;
     }
 
-    @CreateInstanceOfPrivateConstructor
+    @CreateInstanceOfPrivateConstructor(name = "Person", surname = "Unknown")
     private Person(String name, String surname) {
         this.name = name;
         this.surname = surname;

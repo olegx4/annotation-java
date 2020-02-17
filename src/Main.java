@@ -1,3 +1,4 @@
+import annotationprocessors.PrivateConstructorProcessor;
 import person.Person;
 import person.PersonInitializer;
 import utils.PersonDataOutput;
@@ -11,6 +12,7 @@ public class Main {
     public static void main(String[] args) {
         final PersonInitializer personInitializer = new PersonInitializer();
         final PersonDataOutput personDataOutput = new PersonDataOutput();
+        PrivateConstructorProcessor privateConstructorProcessor = new PrivateConstructorProcessor();
         Map<String, String> personPrivateFields;
 
         Person person = new Person(45_67_48, "Oleg", "Shapik");
@@ -22,5 +24,10 @@ public class Main {
 
         personPrivateFields = personInitializer.initializePerson("Vasya", "Pupkin");
         personDataOutput.printData(personPrivateFields.get(SURNAME), personPrivateFields.get(NAME));
+
+        Person person1 = privateConstructorProcessor.process();
+        //for (Person p : arrPersons) {
+        System.out.println(person1.toString());
+        //}
     }
 }
