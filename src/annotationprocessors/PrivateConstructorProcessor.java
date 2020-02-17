@@ -1,30 +1,32 @@
 package annotationprocessors;
 
 import customannotations.CreateInstanceOfPrivateConstructor;
-import customannotations.GetPrivateField;
 import person.Person;
 
 import java.lang.reflect.Constructor;
-import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
-import java.util.HashMap;
-import java.util.Map;
+import java.lang.reflect.Parameter;
+import java.util.ArrayList;
 
 public class PrivateConstructorProcessor {
-    public Person process() {
-        Person person2 = new Person();
+    public ArrayList<Person> process() {
+        ArrayList<Person> persons = null;
         try {
             Class<?> examplePerson = Class.forName(Person.class.getName());
+            Constructor<?>[] constructors = examplePerson.getDeclaredConstructors();
             Class<?>[] params = {String.class, String.class};
-            Constructor<?> exampleConstructor = examplePerson.getDeclaredConstructor(params);
-            exampleConstructor.setAccessible(true);
-            //person2 = (Person) exampleConstructor.newInstance(name, surname);
-            if (exampleConstructor.isAnnotationPresent(CreateInstanceOfPrivateConstructor.class)) {
-                exampleConstructor.setAccessible(true);
-                person2 =  (Person) exampleConstructor.newInstance( exampleConstructor.getDeclaredAnnotation(CreateInstanceOfPrivateConstructor.class).name(),
-                        exampleConstructor.getDeclaredAnnotation(CreateInstanceOfPrivateConstructor.class).surname());
-              //  i++;
-            //}
+            Class<?>[] parameter = {int.class};
+            persons = new ArrayList<>();
+            for (Constructor<?> c : constructors) {
+                if (c.isAnnotationPresent(CreateInstanceOfPrivateConstructor.class)) {
+                    c.setAccessible(true);
+                    if (c.equals(examplePerson.getDeclaredConstructor(parameter))) {
+                        persons.add((Person) c.newInstance(c.getDeclaredAnnotation(CreateInstanceOfPrivateConstructor.class).phoneNumber()));
+                    } else if (c.equals(examplePerson.getDeclaredConstructor(params))) {
+                        persons.add((Person) c.newInstance(c.getDeclaredAnnotation(CreateInstanceOfPrivateConstructor.class).name(),
+                                c.getDeclaredAnnotation(CreateInstanceOfPrivateConstructor.class).surname()));
+                    }
+                }
             }
         } catch (IllegalAccessException e) {
             System.err.println(e.getMessage());
@@ -37,6 +39,6 @@ public class PrivateConstructorProcessor {
         } catch (NoSuchMethodException e) {
             e.printStackTrace();
         }
-        return person2;
+        return persons;
     }
 }
