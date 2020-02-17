@@ -3,6 +3,7 @@ import person.Person;
 import person.PersonInitializer;
 import utils.PersonDataOutput;
 
+import java.util.ArrayList;
 import java.util.Map;
 
 public class Main {
@@ -25,9 +26,8 @@ public class Main {
         personPrivateFields = personInitializer.initializePerson("Vasya", "Pupkin");
         personDataOutput.printData(personPrivateFields.get(SURNAME), personPrivateFields.get(NAME));
 
-        Person person1 = privateConstructorProcessor.process();
-        //for (Person p : arrPersons) {
-        System.out.println(person1.toString());
-        //}
+        ArrayList<Person> persons = privateConstructorProcessor.process();
+        for (Person p : persons)
+            System.out.println(p.toString());
     }
 }
