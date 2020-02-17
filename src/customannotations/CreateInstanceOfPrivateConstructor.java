@@ -8,7 +8,8 @@ import java.lang.annotation.Target;
 @Target(ElementType.CONSTRUCTOR)
 @Retention(RetentionPolicy.RUNTIME)
 public @interface CreateInstanceOfPrivateConstructor {
-    String name();
-    String surname();
+    int phoneNumber() default 55_55_55;
+    String name() default "DefaultName";
+    String surname() default "DefaultSurname";
 }
 
