@@ -5,39 +5,40 @@ import person.Person;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Parameter;
 import java.util.ArrayList;
 
 public class PrivateConstructorProcessor {
+    private final System.Logger logger = System.getLogger("PrivateConstructorProcessor");
+
     public ArrayList<Person> process() {
-        ArrayList<Person> persons = null;
+        ArrayList<Person> persons = new ArrayList<>();
         try {
-            Class<?> examplePerson = Class.forName(Person.class.getName());
-            Constructor<?>[] constructors = examplePerson.getDeclaredConstructors();
-            Class<?>[] params = {String.class, String.class};
-            Class<?>[] parameter = {int.class};
-            persons = new ArrayList<>();
+            final Class<?> examplePerson = Class.forName(Person.class.getName());
+            final Constructor<?>[] constructors = examplePerson.getDeclaredConstructors();
+            final Class<?>[] params = {String.class, String.class};
+            final Class<?>[] parameter = {int.class};
+            final Class<CreateInstanceOfPrivateConstructor> instanceOfPrivateConstructor = CreateInstanceOfPrivateConstructor.class;
             for (Constructor<?> c : constructors) {
-                if (c.isAnnotationPresent(CreateInstanceOfPrivateConstructor.class)) {
+                if (c.isAnnotationPresent(instanceOfPrivateConstructor)) {
                     c.setAccessible(true);
                     if (c.equals(examplePerson.getDeclaredConstructor(parameter))) {
-                        persons.add((Person) c.newInstance(c.getDeclaredAnnotation(CreateInstanceOfPrivateConstructor.class).phoneNumber()));
+                        persons.add((Person) c.newInstance(c.getDeclaredAnnotation(instanceOfPrivateConstructor).phoneNumber()));
                     } else if (c.equals(examplePerson.getDeclaredConstructor(params))) {
-                        persons.add((Person) c.newInstance(c.getDeclaredAnnotation(CreateInstanceOfPrivateConstructor.class).name(),
-                                c.getDeclaredAnnotation(CreateInstanceOfPrivateConstructor.class).surname()));
+                        persons.add((Person) c.newInstance(c.getDeclaredAnnotation(instanceOfPrivateConstructor).name(),
+                                c.getDeclaredAnnotation(instanceOfPrivateConstructor).surname()));
                     }
                 }
             }
         } catch (IllegalAccessException e) {
-            System.err.println(e.getMessage());
+            logger.log(System.Logger.Level.ERROR, "Constructor is inaccessible");
         } catch (InvocationTargetException e) {
-            e.printStackTrace();
+            logger.log(System.Logger.Level.ERROR, "The constructor throws an Exception");
         } catch (InstantiationException e) {
-            e.printStackTrace();
+            logger.log(System.Logger.Level.ERROR, "The class that declares the underlying constructor represents an abstract class");
         } catch (ClassNotFoundException e) {
-            e.printStackTrace();
+            logger.log(System.Logger.Level.ERROR, "Unable to find method in the Person class");
         } catch (NoSuchMethodException e) {
-            e.printStackTrace();
+            logger.log(System.Logger.Level.ERROR, "Cannot find a matching method");
         }
         return persons;
     }
