@@ -13,10 +13,10 @@ public class Main {
     public static void main(String[] args) {
         final PersonInitializer personInitializer = new PersonInitializer();
         final PersonDataOutput personDataOutput = new PersonDataOutput();
-        PrivateConstructorProcessor privateConstructorProcessor = new PrivateConstructorProcessor();
+        final PrivateConstructorProcessor privateConstructorProcessor = new PrivateConstructorProcessor();
         Map<String, String> personPrivateFields;
 
-        Person person = new Person(45_67_48, "Oleg", "Shapik");
+        final Person person = new Person(45_67_48, "Oleg", "Shapik");
         personPrivateFields = personInitializer.getPrivateFields(person);
         personDataOutput.printData(personPrivateFields.get(SURNAME), personPrivateFields.get(NAME));
 
@@ -26,7 +26,7 @@ public class Main {
         personPrivateFields = personInitializer.initializePerson("Vasya", "Pupkin");
         personDataOutput.printData(personPrivateFields.get(SURNAME), personPrivateFields.get(NAME));
 
-        ArrayList<Person> persons = privateConstructorProcessor.process();
+        final ArrayList<Person> persons = privateConstructorProcessor.process();
         for (Person p : persons)
             System.out.println(p.toString());
     }

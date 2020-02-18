@@ -38,13 +38,13 @@ public class PersonInitializer {
     }
 
     public Map<String, String> initializePerson(String name, String surname) {
-        Person person2 = new Person();
+        Person person = new Person();
         try {
-            Class<?> examplePerson = Class.forName(Person.class.getName());
-            Class<?>[] params = {String.class, String.class};
-            Constructor<?> exampleConstructor = examplePerson.getDeclaredConstructor(params);
+            final Class<?> examplePerson = Class.forName(Person.class.getName());
+            final Class<?>[] params = {String.class, String.class};
+            final Constructor<?> exampleConstructor = examplePerson.getDeclaredConstructor(params);
             exampleConstructor.setAccessible(true);
-            person2 = (Person) exampleConstructor.newInstance(name, surname);
+            person = (Person) exampleConstructor.newInstance(name, surname);
         } catch (InstantiationException e) {
             logger.log(System.Logger.Level.ERROR, "Cannot create instance of the Person class");
         } catch (IllegalAccessException e) {
@@ -56,6 +56,6 @@ public class PersonInitializer {
         } catch (ClassNotFoundException e) {
             logger.log(System.Logger.Level.ERROR, "Unable to find Person class");
         }
-        return privateFieldProcessor.process(person2);
+        return privateFieldProcessor.process(person);
     }
 }
